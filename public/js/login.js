@@ -1,4 +1,5 @@
 rootAPI= `http://localhost:3000/login`;
+rootAPILOGOUT= `http://localhost:3000/logout`;
 function redirectToLogin()
 {
     window.location.href="http://localhost:3000/login";
@@ -21,9 +22,43 @@ async function login()
     {
         console.log("good");
         window.location.href="http://localhost:3000";
+
+        //document.getElementById("logout").style.display="block";
+        //document.getElementById("account").innerHTML+=`<p>Hello, ${username}</p>`;
     }
     else
     {
         alert("Invalid data, please try again.");
     }
+    
 }
+
+function displayName()
+{
+    if(!document.cookie=="")
+    {
+        console.log(document.cookie);
+        document.getElementById("logout").style.display="block";
+        document.getElementById("account").innerHTML+=`<p id="username">Hello, ${document.cookie.split("=")[1].split(";")[0]}</p>`;
+        document.getElementById("login").style.display="none";
+        document.getElementById("register").style.display="none";
+    }
+    else
+    {
+        document.getElementById("logout").style.display="none";
+        //document.getElementById("account").innerHTML+=`<p id="username">Hello, ${document.cookie.split("=")[1]}</p>`;
+        document.getElementById("login").style.display="block";
+        document.getElementById("register").style.display="block";
+    }
+}
+
+window.onload = function() {
+    displayName();
+  };
+
+function logout()
+{
+    console.log("sending logout req");
+    fetch(rootAPILOGOUT,{method:"GET",withCredentials: true,credentials: 'include'});
+    location.reload();
+}  

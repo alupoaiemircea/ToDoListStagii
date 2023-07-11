@@ -2,10 +2,16 @@
 var express = require('express');
 var app = express();
 const path = require('path')
-const bodyParser = require('body-parser')
 const fs = require('fs');
+//const helmet = require("helmet");
+const cookieparser = require("cookie-parser");
 
 var userId=0;
+
+//app.use(helmet());
+
+// allow the app to use cookieparser
+app.use(cookieparser());
 
 app.use(express.json());
 // on the request to root (localhost:3000/)
@@ -44,14 +50,32 @@ app.post('/login',(req,res)=>{
     {
         if(data.username===users[i].username && data.password===users[i].password)
         {
-            res.sendStatus(200);
+            
             userFound=true;
+            res.cookie("username", data.username);
+            res.cookie("id",users[i].id);
+            res.sendStatus(200);
         }   
     } 
       if(!userFound)
         {
             res.sendStatus(300);
         } 
+})
+
+app.get('/logout', (req, res) => {
+    // clear the cookie
+    console.log("cookie cleared");
+    res.clearCookie("username", {path:'/'});
+    res.clearCookie("id", {path:'/'});
+    res.sendStatus(200);
+  });
+
+app.get('/myTasks',(req,res)=>{
+    //console.log(req.cookies);
+    let myTasks=getTasksByUser(req.cookies.id);
+    console.log(myTasks);
+    res.status(200).send(myTasks);
 })
 app.use(express.static('public'));
 
@@ -71,4 +95,17 @@ function getUsers()
     let users= fs.readFileSync("users.json",{ encoding: 'utf8', flag: 'r' });
     users= JSON.parse(users);
     return users;
+}
+function getTasksByUser(userId)
+{
+    let allTasks=fs.readFileSync("lists.json",{ encoding: 'utf8', flag: 'r' });
+    allTasks= JSON.parse(allTasks);
+    for(let i=0;i<allTasks.length;i++)
+    {
+        if(userId==allTasks[i].id)
+        {
+            return allTasks[i].tasks;
+        }
+    }
+    return null;
 }

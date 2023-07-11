@@ -7,6 +7,7 @@
 <script src="/js/sideContent.js"></script>
 <script src="/js/register.js"></script>
 <script src="/js/login.js"></script>
+<script src="/js/loadTasks.js"></script>
 </head>
 
 
@@ -14,9 +15,10 @@
 <div id="content">
     <div id="top">     
          <button onclick="toggleSideOn()" class="accountBtn"><p>==</p></button>
-        <div id="account">   
-            <button class="accountBtn" type="submit" onclick="redirectToLogin()"><p>Login</p></button>
-            <button class="accountBtn" type="submit" onclick="redirectToRegister()"><p>Register</p></button>
+        <div id="account"> 
+            <button class="accountBtn" id="logout" onclick="logout()">Logout</button>  
+            <button class="accountBtn" id="login" type="submit" onclick="redirectToLogin()"><p>Login</p></button>
+            <button class="accountBtn" id="register" type="submit" onclick="redirectToRegister()"><p>Register</p></button>
            </div>
     </div>
     <div id="side">    
