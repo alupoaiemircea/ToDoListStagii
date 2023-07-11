@@ -1,0 +1,41 @@
+#side{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(131, 131, 138);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+ }
+#upcoming{
+    height:30%;
+}
+#myLists{
+    height:30%;
+}
+#upcoming{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#upcomingList
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+#upcoming > p{
+    font-size: larger;
+}
+.upcomingItem{
+    height: 30px;
+    background-color: white;
+}
+#toggleOffSide{
+    font-size: 20px;
+    border-style: none;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-right:5px;
+}
