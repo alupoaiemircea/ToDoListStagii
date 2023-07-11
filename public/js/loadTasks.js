@@ -1,6 +1,9 @@
 rootAPI= `http://localhost:3000/myTasks`;
 
 fetch(rootAPI, {method: 'GET'})
-.then(function(response){
-    console.log(JSON.stringify(response.json));
-});
+.then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch(console.error);
+  //doesnt load tasks, outputs null

@@ -53,7 +53,9 @@ function displayName()
 }
 
 window.onload = function() {
+    //error it tries to access logout element from login.html, doesnt exist
     displayName();
+    
   };
 
 function logout()

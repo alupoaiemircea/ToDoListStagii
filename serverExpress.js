@@ -75,7 +75,7 @@ app.get('/myTasks',(req,res)=>{
     //console.log(req.cookies);
     let myTasks=getTasksByUser(req.cookies.id);
     console.log(myTasks);
-    res.status(200).send(myTasks);
+    res.status(200).send(JSON.stringify(myTasks));
 })
 app.use(express.static('public'));
 
