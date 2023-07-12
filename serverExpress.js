@@ -26,7 +26,7 @@ app.get('/register', function (req, res) {
 app.post('/register',(req,res)=>{
     let data = req.body;
     data.id=userId;
-
+    userId++;
     let users= getUsers();
     users.push(data);
 
